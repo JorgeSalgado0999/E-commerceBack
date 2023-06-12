@@ -2,11 +2,28 @@ POST http://localhost:8080/products?category_id=1&user_id=1
 Content-Type: application/json
 
 {
-    "name": "Audifonos Bose",
+    "name": "Audifonos Sony",
     "description": "Excelente calidad, solo se usaron una vez",
     "price": 1000,
     "category_id": 1,
     "user_id": 1
 }
+###
+GET http://localhost:8080/products
+###
+GET http://localhost:8080/products/3
 
-GET http://localhost:8080/product/2
+###
+PUT http://localhost:8080/products/3
+Content-Type: application/json
+
+{
+    "name": "Audifonos Bose",
+    "description": "Empaque sellado y con garantía",
+    "price": 1000,
+    "category_id": 1,
+    "user_id": 1
+}
+
+###
+DELETE http://localhost:8080/products/3

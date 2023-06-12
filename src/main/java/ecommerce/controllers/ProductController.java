@@ -2,6 +2,7 @@ package ecommerce.controllers;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,29 @@ public class ProductController {
 
 
   @PostMapping("/products")
-  public ResponseEntity<Object> createProduct(@RequestBody Product product, @RequestParam Integer user_id, @RequestParam Integer category_id) {
+  public ResponseEntity<Object> createProduct(@RequestBody Product product, @RequestParam Integer user_id,
+      @RequestParam Integer category_id) {
     Map<String, Object> response = new HashMap<>();
     try {
       Product newProduct = service.createProduct(product, user_id, category_id);
       response.put("status", 200);
       response.put("data", Collections.singletonMap("response", "Product created successfully"));
       response.put("id", newProduct.getId());
+      return ResponseEntity.status(HttpStatus.OK).body(response);
+    } catch (Exception e) {
+      response.put("status", "error");
+      response.put("response", e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+  }
+  
+  @GetMapping("/products")
+  public ResponseEntity<Object> getAllProducts() {
+    Map<String, Object> response = new HashMap<>();
+    try {
+      List<Product> products = service.getAllProducts();
+      response.put("status", 200);
+      response.put("data", Collections.singletonMap("response", products));
       return ResponseEntity.status(HttpStatus.OK).body(response);
     } catch (Exception e) {
       response.put("status", "error");

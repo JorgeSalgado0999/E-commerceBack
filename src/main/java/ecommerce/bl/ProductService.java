@@ -63,7 +63,8 @@ public class ProductService {
     if (optionalProduct.isPresent()) {
       Product existingProduct = optionalProduct.get();
       existingProduct.setName(updatedProduct.getName());
-      existingProduct.setCategory(updatedProduct.getCategory());
+      existingProduct.setDescription(updatedProduct.getDescription());
+      // existingProduct.setCategory(updatedProduct.getCategory());
       System.out.println("Updating Product: ");
       return repo.save(existingProduct);
       } else {

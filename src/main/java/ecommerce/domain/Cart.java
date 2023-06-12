@@ -3,6 +3,9 @@ package ecommerce.domain;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,10 +24,12 @@ public class Cart {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "product_id", referencedColumnName = "id")
   private Product product;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
   private User user;

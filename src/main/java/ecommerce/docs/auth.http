@@ -4,11 +4,11 @@ Content-Type: application/json
 {
   "email": "A01636629@tec.mx",
   "password": "password",
-  "firstName": "Jorge Luis",
-  "lastName": "Salgado Ledezma",
+  "firstName": "Jorge",
+  "lastName": "Salgado",
   "phone": "3317095745",
   "age": 24,
-  "nickName": "MasterUser"
+  "nickName": "JS"
 }
 ###
 POST http://localhost:8080/auth/1

@@ -1,0 +1,14 @@
+###
+POST http://localhost:8080/cart?user_id=2&product_id=4
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "product_id": 1
+}
+
+###
+GET http://localhost:8080/cart/2
+
+###
+DELETE http://localhost:8080/cart/1
