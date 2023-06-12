@@ -3,12 +3,23 @@ package ecommerce.domain;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-public class Purchases {
+@Entity
+@Table(name="purchases")
+public class Purchase {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
   @ManyToOne
   @JoinColumn(name = "buyer_id", referencedColumnName = "id")
@@ -36,13 +47,22 @@ public class Purchases {
     this.updatedAt = LocalDateTime.now();
   }
   
-  public Purchases() {
+  public Purchase() {
   }
 
-  public Purchases(User buyer, User seller, Product product) {
+  public Purchase(User buyer, User seller, Product product) {
     this.buyer = buyer;
     this.seller = seller;
     this.product = product;
+  }
+
+  
+
+  public Integer getId() {
+    return id;
+  }
+  public void setId(Integer id) {
+    this.id = id;
   }
   public User getBuyer() {
     return buyer;

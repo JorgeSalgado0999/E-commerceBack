@@ -74,6 +74,21 @@ public class ProductController {
     }
   }
 
+  @GetMapping("/products/user/{id}")
+  public ResponseEntity<Object> getProductsByUser(@PathVariable(value = "id") Integer id) {
+    Map<String, Object> response = new HashMap<>();
+    try {
+      List<Product> product = service.getProductsByUser(id);
+      response.put("status", 200);
+      response.put("data", Collections.singletonMap("response", product));
+      return ResponseEntity.status(HttpStatus.OK).body(response);
+    } catch (Exception e) {
+      response.put("status", "error");
+      response.put("response", e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+  }
+
   @PutMapping("/products/{id}")
   public ResponseEntity<Object> updateProduct(@RequestBody Product product, @PathVariable(value = "id") Integer id) {
     Map<String, Object> response = new HashMap<>();

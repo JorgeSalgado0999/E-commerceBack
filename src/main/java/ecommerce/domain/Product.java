@@ -36,6 +36,7 @@ public class Product {
   @Column (nullable= false  )
   private Double price;
 
+  @JsonIgnore
   @ManyToOne
   private User user;
 

@@ -71,7 +71,7 @@ public class UserService {
       }
       if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
         throw new RuntimeException("First name is required");
-    }
+      }
       if (user.getLastName() == null || user.getLastName().isEmpty()) {
         throw new RuntimeException("Last name is required");
       }
@@ -85,50 +85,62 @@ public class UserService {
         throw new RuntimeException("Nickname is required");
       }
 
-    // Update user
-    // Retrieve the existing user from the repository
-    User existingUser = repo.findById(Integer.parseInt(id))
-            .orElseThrow(() -> new RuntimeException("User not found"));
+      // Update user
+      // Retrieve the existing user from the repository
+      User existingUser = repo.findById(Integer.parseInt(id))
+          .orElseThrow(() -> new RuntimeException("User not found"));
 
-    // Update the properties of the existing user
-    existingUser.setEmail(user.getEmail());
-    existingUser.setPassword(user.getPassword());
-    existingUser.setFirstName(user.getFirstName());
-    existingUser.setLastName(user.getLastName());
-    existingUser.setPhone(user.getPhone());
-    existingUser.setAge(user.getAge());
-    existingUser.setNickName(user.getNickName());
-    if (user.getCountry() != null && !user.getCountry().isEmpty()) {
-      existingUser.setCountry(user.getCountry());
-    }
-    if (user.getState() != null && !user.getState().isEmpty()) {
-      existingUser.setState(user.getState());
-    }
-    if (user.getCity() != null && !user.getCity().isEmpty()) {
-      existingUser.setCity(user.getCity());
-    }
-    if (user.getStreet() != null && !user.getStreet().isEmpty()) {
-      existingUser.setStreet(user.getStreet());
-    }
-    if (user.getZipCode() != null && !user.getZipCode().isEmpty()) {
-      existingUser.setZipCode(user.getZipCode());
-    }
-    if (user.getExternalNumber() != null && !user.getExternalNumber().isEmpty()) {
-      existingUser.setExternalNumber(user.getExternalNumber());
-    }
-    if (user.getInternalNumber() != null && !user.getInternalNumber().isEmpty()) {
-      existingUser.setInternalNumber(user.getInternalNumber());
-    }
-    if(user.getSuburb() != null && !user.getSuburb().isEmpty()) {
-      existingUser.setSuburb(user.getSuburb());
-    }
+      // Update the properties of the existing user
+      existingUser.setEmail(user.getEmail());
+      existingUser.setPassword(user.getPassword());
+      existingUser.setFirstName(user.getFirstName());
+      existingUser.setLastName(user.getLastName());
+      existingUser.setPhone(user.getPhone());
+      existingUser.setAge(user.getAge());
+      existingUser.setNickName(user.getNickName());
+      if (user.getCountry() != null && !user.getCountry().isEmpty()) {
+        existingUser.setCountry(user.getCountry());
+      }
+      if (user.getState() != null && !user.getState().isEmpty()) {
+        existingUser.setState(user.getState());
+      }
+      if (user.getCity() != null && !user.getCity().isEmpty()) {
+        existingUser.setCity(user.getCity());
+      }
+      if (user.getStreet() != null && !user.getStreet().isEmpty()) {
+        existingUser.setStreet(user.getStreet());
+      }
+      if (user.getZipCode() != null && !user.getZipCode().isEmpty()) {
+        existingUser.setZipCode(user.getZipCode());
+      }
+      if (user.getExternalNumber() != null && !user.getExternalNumber().isEmpty()) {
+        existingUser.setExternalNumber(user.getExternalNumber());
+      }
+      if (user.getInternalNumber() != null && !user.getInternalNumber().isEmpty()) {
+        existingUser.setInternalNumber(user.getInternalNumber());
+      }
+      if (user.getSuburb() != null && !user.getSuburb().isEmpty()) {
+        existingUser.setSuburb(user.getSuburb());
+      }
 
-    // Save the updated user back to the repository
-    System.out.println("Updating User: ");
-    return repo.save(existingUser);
-  } else {
+      // Save the updated user back to the repository
+      System.out.println("Updating User: ");
+      return repo.save(existingUser);
+    } else {
       throw new RuntimeException("Error occurred while updating the user");
+    }
   }
+
+  public User getUserByEmailAndPassword(String email, String password) {
+    System.out.println("Validating User:\n\n\n");
+    System.out.println("Email: " + email);
+    System.out.println("Password: " + password);
+    User user = repo.findByEmail(email);
+    if (user != null && user.getPassword().equals(password)) {
+        return user;
+    } else {
+        throw new RuntimeException("Invalid email or password");
+    }
 }
 
 }

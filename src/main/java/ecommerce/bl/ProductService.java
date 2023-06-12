@@ -51,10 +51,15 @@ public class ProductService {
   public Product getProductById(Integer id) {
     Optional<Product> optionalProduct = repo.findById(id);
     if (optionalProduct.isPresent()) {
-        return optionalProduct.get();
+      return optionalProduct.get();
     } else {
-        throw new RuntimeException("Product not found");
+      throw new RuntimeException("Product not found");
     }
+  }
+  public List<Product> getProductsByUser(Integer userId) {
+    User user = userService.getUser(userId);
+    List<Product> userProducts = user.getProducts();
+    return userProducts;
   }
 
   public Product updateProduct(Product updatedProduct) {

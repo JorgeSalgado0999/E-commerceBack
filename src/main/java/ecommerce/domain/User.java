@@ -3,6 +3,8 @@ package ecommerce.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,6 +59,7 @@ public class User {
   @Column(nullable = true, length = 50)
   private String zipCode;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "user")
   private List<Product> products;
 
@@ -217,6 +220,14 @@ public class User {
 
   public void setZipCode(String zipCode) {
     this.zipCode = zipCode;
+  }
+
+
+  public List<Product> getProducts() {
+    return products;
+  }
+  public void setProducts(List<Product> products) {
+    this.products = products;
   }
 
   

@@ -28,11 +28,32 @@ public class AuthController {
   public ResponseEntity<Object> signup(@RequestBody User user) {
     Map<String, Object> response = new HashMap<>();
     Map<String, Object> responseData = new HashMap<>();
-    try{
+    try {
       User newObj = service.createUser(user);
       response.put("status", 200);
       responseData.put("response", "Usuario creado exitosamente");
       responseData.put("id", newObj.getUserId());
+      response.put("data", responseData);
+      return ResponseEntity.status(HttpStatus.OK).body(response);
+    } catch (Exception e) {
+      System.out.println("Error Controller: " + e);
+      response.put("status", "error");
+      response.put("response", e.getMessage());
+      // response.put("response", Collections.singletonMap("response",e.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+  }
+  
+  @GetMapping("/auth")
+  public ResponseEntity<Object> signin( @RequestParam String email,
+            @RequestParam String password) {
+    Map<String, Object> response = new HashMap<>();
+    Map<String, Object> responseData = new HashMap<>();
+    try {
+      User user = service.getUserByEmailAndPassword(email, password);
+      response.put("status", 200);
+      responseData.put("response", "Usuario autenticado exitosamente");
+      responseData.put("user", user);
       response.put("data", responseData);
       return ResponseEntity.status(HttpStatus.OK).body(response);
     } catch (Exception e) {

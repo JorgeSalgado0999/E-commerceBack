@@ -2,14 +2,16 @@ POST http://localhost:8080/auth
 Content-Type: application/json
 
 {
-  "email": "A01636629@tec.mx",
+  "email": "nuevo@tec.mx",
   "password": "password",
-  "firstName": "Jorge",
-  "lastName": "Salgado",
+  "firstName": "Nuevo",
+  "lastName": "nuevo",
   "phone": "3317095745",
   "age": 24,
-  "nickName": "JS"
+  "nickName": "New"
 }
+###
+GET http://localhost:8080/auth?email=A01636629@tec.mx&password=password
 ###
 POST http://localhost:8080/auth/1
 Content-Type: application/json

@@ -1,0 +1,15 @@
+###
+POST http://localhost:8080/purchase?sellerId=2&productId=4&buyerId=2
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "product_id": 1
+}
+
+###
+GET http://localhost:8080/purchase/seller/2
+
+
+###
+GET http://localhost:8080/purchase/buyer/2
