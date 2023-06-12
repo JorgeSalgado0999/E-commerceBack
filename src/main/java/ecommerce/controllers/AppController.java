@@ -24,7 +24,7 @@ public class AppController {
 
 
   @GetMapping("/")
-  public ResponseEntity<Object> getAllProducts() {
+  public ResponseEntity<Object> mainView() {
     String text = "Hello World";
 
     Map<String, Object> response = new HashMap<>();
